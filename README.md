@@ -1,6 +1,10 @@
 # Elegant Calculator
 
-A new Flutter project.
+A simple and elegant Calculator app developer in Flutter.
+
+# Preview
+![iphone xs](https://user-images.githubusercontent.com/15217195/52176039-59d19180-27d3-11e9-9772-cea59694d92f.png)
+
 
 ## Getting Started
 
@@ -14,3 +18,10 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our 
 [online documentation](https://flutter.io/docs), which offers tutorials, 
 samples, guidance on mobile development, and a full API reference.
+
+# Aknowledgement
+This project is inspired by a design on Uplabs.
+
+[Uplabs Simple Calculator](https://www.uplabs.com/posts/simple-calculator-theme) By [Willy](https://www.uplabs.com/wii2zo)
+
+![preview](https://user-images.githubusercontent.com/15217195/52176147-bc775d00-27d4-11e9-90d9-ebeb1f53f225.jpg)
