@@ -1,4 +1,4 @@
-# calculator
+# Elegant Calculator
 
 A new Flutter project.
 
