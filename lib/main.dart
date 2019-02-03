@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
 
       if (_currentValues.isNotEmpty) {
         lastValue = double.parse(convertToString(_currentValues));
-      print('Action Tapped :: $lastValue');
+      }
     });
   }
 
