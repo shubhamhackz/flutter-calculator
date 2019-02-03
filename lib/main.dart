@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _actionKey = actionKey;
 
-      lastValue = double.parse(convertToString(_currentValues));
+        lastValue = double.parse(convertToString(_currentValues));
       print('Action Tapped :: $lastValue');
     });
   }
@@ -205,13 +205,12 @@ class _MyAppState extends State<MyApp> {
                 enabled: true,
                 autofocus: true,
                 controller: _textEditingController,
-
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   fontFamily: 'Avenir',
                   fontStyle: FontStyle.normal,
                   color: Colors.white,
-                  fontSize: 60.0
+                  fontSize: 60.0,
                 ),
                 decoration: InputDecoration.collapsed(
                   hintText: '0',
@@ -232,6 +231,7 @@ class _MyAppState extends State<MyApp> {
           ),
           Expanded(
               child: Container(
+                padding: EdgeInsets.all(30.0),
                 color: Colors.white,
                   child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -369,7 +369,7 @@ class ActionButton extends StatelessWidget {
               child: Container(
                 alignment: Alignment.center,
                 padding: padding ?? EdgeInsets.all(0.0),
-                color: Colors.white70,
+                color: Color(0xffF6F6F6),
                 child: GestureDetector(
                   onTap: () {
                     onTapped(key);
