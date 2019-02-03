@@ -3,7 +3,7 @@
 A simple and elegant Calculator app developer in Flutter.
 
 # Preview
-![iphone xs](https://user-images.githubusercontent.com/15217195/52176039-59d19180-27d3-11e9-9772-cea59694d92f.png)
+![iphone xs](https://user-images.githubusercontent.com/15217195/52178363-8d241880-27f3-11e9-82c4-12b509442ff4.png)
 
 
 ## Getting Started
