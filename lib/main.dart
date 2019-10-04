@@ -4,19 +4,23 @@ void main() => runApp(MaterialApp(
   home: MyApp(),
 ));
 
-typedef ActionCallBack = void Function(Key key);
-typedef KeyCallBack = void Function(Key key);
 
-const Color primaryColor = const Color(0xff50E3C2);
-const Color keypadColor = const Color(0xff4A4A4A);
 
 
 class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
+typedef ActionCallBack = void Function(Key key);
+typedef KeyCallBack = void Function(Key key);
 
+ Color primaryColor = const Color(0xff50E3C2);
+//const Color primaryColor = Colors.deepOrange;
+ Color keypadColor = const Color(0xff4A4A4A);
 class _MyAppState extends State<MyApp> {
 
+//   Color primaryColor = const Color(0xff50E3C2);
+////const Color primaryColor = Colors.deepOrange;
+//   Color keypadColor = const Color(0xff4A4A4A);
   Key _actionKey;
   Key _plusKey = Key('plus');
   Key _minusKey = Key('minus');
@@ -61,6 +65,7 @@ class _MyAppState extends State<MyApp> {
       savedLastValue = true;
     }
     setState(() {
+     try{
       if (identical(_sevenKey, key)) {
         _currentValues.add('7');
         _textEditingController.text = convertToString(_currentValues);
@@ -109,7 +114,12 @@ class _MyAppState extends State<MyApp> {
         calculateValue();
         savedLastValue = false;
       }
+
+     }catch(e){
+        print("some error = ");
+     }
     });
+
   }
 
   String validateDouble(double doubleValue) {
@@ -197,6 +207,8 @@ class _MyAppState extends State<MyApp> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          ChangeColors(),
+
           Container(
             alignment: Alignment.bottomRight,
             width: width,
@@ -210,7 +222,7 @@ class _MyAppState extends State<MyApp> {
                 style: TextStyle(
                   fontFamily: 'Avenir',
                   fontStyle: FontStyle.normal,
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 60.0,
                 ),
                 decoration: InputDecoration.collapsed(
@@ -222,97 +234,113 @@ class _MyAppState extends State<MyApp> {
                 ),              ),
             ),
           ),
-          Row(
-            children: <Widget>[
-              buildActionButton('+', _plusKey),
-              buildActionButton('-', _minusKey),
-              buildActionButton('x', _multiplyKey),
-              buildActionButton('/', _divideKey)
-            ],
+          Container(
+            height: MediaQuery.of(context).size.height/9,
+            child: Row(
+              children: <Widget>[
+                buildActionButton('+', _plusKey),
+                buildActionButton('-', _minusKey),
+                buildActionButton('x', _multiplyKey),
+                buildActionButton('/', _divideKey)
+              ],
+            ),
           ),
+
           Expanded(
               child: Container(
-                padding: EdgeInsets.all(30.0),
-                color: Colors.white,
-                  child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Expanded(
-                        child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          buildKeyItem('7', _sevenKey),
-                          buildKeyItem('8',_eightKey),
-                          buildKeyItem('9',_nineKey),
-                        ],
+                decoration: BoxDecoration(
+                  color: Colors.white,
+
+//                  gradient: LinearGradient(
+//                      colors: [Colors.black12,Colors.white,Colors.white],
+//                    begin: Alignment.topLeft,
+//                    end: Alignment.bottomRight,
+////                    stops: [0.1,0.9,0.9]
+//                  )
+                ),
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(15, 20, 15, 30),
+//                  color: Colors.white24,
+                    child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Expanded(
+                          child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            buildKeyItem('7', _sevenKey),
+                            buildKeyItem('8',_eightKey),
+                            buildKeyItem('9',_nineKey),
+                          ],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                        child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          buildKeyItem('4',_fourKey),
-                          buildKeyItem('5',_fiveKey),
-                          buildKeyItem('6',_sixKey),
-                        ],
+                      Expanded(
+                          child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            buildKeyItem('4',_fourKey),
+                            buildKeyItem('5',_fiveKey),
+                            buildKeyItem('6',_sixKey),
+                          ],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                        child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          buildKeyItem('1',_oneKey),
-                          buildKeyItem('2',_twoKey),
-                          buildKeyItem('3',_threeKey),
-                        ],
+                      Expanded(
+                          child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            buildKeyItem('1',_oneKey),
+                            buildKeyItem('2',_twoKey),
+                            buildKeyItem('3',_threeKey),
+                          ],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                        child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          buildKeyItem('.',_dotKey),
-                          buildKeyItem('0',_zeroKey),
-                          KeyItem(
-                            key: _clearKey,
-                            child: Icon(
-                              Icons.backspace,
-                              size: 40,
-                              color: keypadColor,
-                            ),
-                            onKeyTap: onKeyTapped,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                        child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          buildKeyItem('ac',_allClearKey),
-                          buildKeyItem(' ',Key('')),
-                          KeyItem(
-                            key: _equalsKey,
-                            onKeyTap: onKeyTapped,
-                            child: Text(
-                              '=',
-                              style: TextStyle(
-                                color: primaryColor,
-                                fontSize: 80.0,
-                                shadows: [
-                                  BoxShadow(
-                                    blurRadius: 20.0,
-                                    color: primaryColor,
-                                    spreadRadius: 30.0
-                                  )
-                                ]
+                      Expanded(
+                          child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            buildKeyItem('.',_dotKey),
+                            buildKeyItem('0',_zeroKey),
+                            KeyItem(
+                              key: _clearKey,
+                              child: Icon(
+                                Icons.backspace,
+                                size: 40,
+                                color: keypadColor,
                               ),
+                              onKeyTap: onKeyTapped,
                             ),
-                          )
-                        ],
+                          ],
+                        ),
                       ),
-                    )
-                  ],
+                      Expanded(
+                          child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            buildKeyItem('ac',_allClearKey),
+                            buildKeyItem(' ',Key('')),
+                            KeyItem(
+                              key: _equalsKey,
+                              onKeyTap: onKeyTapped,
+                              child: Text(
+                                '=',
+                                style: TextStyle(
+                                  color: primaryColor,
+                                  fontSize: 80.0,
+                                  shadows: [
+                                    BoxShadow(
+                                      blurRadius: 20.0,
+                                      color: primaryColor,
+                                      spreadRadius: 30.0
+                                    )
+                                  ]
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
           )
@@ -346,6 +374,74 @@ class _MyAppState extends State<MyApp> {
       onKeyTap: onKeyTapped,
     );
   }
+
+
+  Widget ChangeColors(){
+    return Container(
+//      color: Colors.black12,
+      margin: EdgeInsets.only(top: 10),
+      height: (height/100)*10,
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          RaisedButton(
+            onPressed: (){
+              print("chnageColors");
+              setState(() {
+                primaryColor = Colors.deepOrange ;
+              });
+            },
+            color: Colors.deepOrange,
+            elevation: 20,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8),side: BorderSide(color: Colors.white)),
+            padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+          ),
+          RaisedButton(
+            onPressed: (){
+              print("chnageColors");
+              setState(() {
+                primaryColor = Colors.blue ;
+              });
+            },
+            color: Colors.blue,
+            elevation: 20,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8),side: BorderSide(color: Colors.white)),
+            padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+          ),
+          RaisedButton(
+            onPressed: (){
+              print("chnageColors");
+              setState(() {
+                primaryColor = Colors.purpleAccent ;
+              });
+            },
+            color: Colors.purpleAccent,
+            elevation: 20,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8),side: BorderSide(color: Colors.white)),
+            padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+          ),
+          RaisedButton(
+
+            onPressed: (){
+              print("chnageColors");
+              setState(() {
+                primaryColor = Colors.redAccent ;
+              });
+            },
+            color: Colors.redAccent,
+            elevation: 20,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8),side: BorderSide(color: Colors.white)),
+            padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+          ),
+
+        ],
+      ),
+    );
+  }
+
+
+
 }
 
 
@@ -375,16 +471,28 @@ class ActionButton extends StatelessWidget {
                   onTap: () {
                     onTapped(key);
                   },                
-                  child: CircleAvatar(
-                    backgroundColor: enabled ? changedBackground : defaultBackground,
-                    radius: 30,
-                    child: Text(
-                      actionName,
-                      style: TextStyle(
-                        color: enabled ? changedForeground : defaultForeground,
-                        fontSize: 40.0,
-                        fontFamily: 'Avenir',
-                        fontWeight: FontWeight.bold
+                  child: Material(
+//                    color: ,
+//                    backgroundColor: enabled ? changedBackground : defaultBackground,
+//                    radius: 30,
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height/15,
+                      width: MediaQuery.of(context).size.width/5,
+                      decoration: ShapeDecoration(
+                          color: enabled ? changedBackground : defaultBackground,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
+                      child: Center(
+                        child: Text(
+                          actionName,
+                          style: TextStyle(
+                            color: enabled ? changedForeground : defaultForeground,
+                            fontSize: 40.0,
+                            fontFamily: 'Avenir',
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -408,6 +516,7 @@ class KeyItem extends StatelessWidget {
     assert(debugCheckHasMaterial(context));
     return Expanded(
         child: Material(
+          elevation: 10,
         type: MaterialType.transparency,
         child: InkResponse(
           splashColor: primaryColor,
@@ -416,6 +525,7 @@ class KeyItem extends StatelessWidget {
           child: Container(
             //color: Colors.white,
             alignment: Alignment.center,
+//            color: Colors.black12,
             child: child,
           ),
         ),
